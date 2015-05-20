@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_light_4">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:text="Set Timer(Mins)"/>
+        <EditText
+            android:id="@+id/et_dialog_timer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:inputType="numberDecimal"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp">
+        <Button
+            android:id="@+id/b_dialog_timer_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Cancel"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/list_selector"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/b_dialog_timer_confirm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Confirm"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/list_selector"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+</LinearLayout>

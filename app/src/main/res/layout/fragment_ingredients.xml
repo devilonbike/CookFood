@@ -1,0 +1,29 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.xplorer.cookfood.Fragment.IngredientsFragment">
+
+    <ListView
+        android:id="@+id/lv_fragement_ingredient"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:background="@color/gray_light_1"
+        android:dividerHeight="4dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:listSelector="@color/gray_light_1"
+        android:footerDividersEnabled="false"></ListView>
+
+    <TextView
+        android:id="@+id/tv_fragement_ingredient"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="No Custom Product Found.\n (Start from basic ingredients)"
+        android:textColor="@color/gray8"
+        android:visibility="gone"/>
+
+</FrameLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_light_8">
+
+    <LinearLayout
+        android:id="@+id/ll_dialog_sign_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <Button
+            android:id="@+id/b_sign_up"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="Sign Up"
+            android:background="@drawable/list_selector" />
+
+        <Button
+            android:id="@+id/b_log_in"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="Log in"
+            android:background="@color/gray_light_8" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/iv_dialog_sign_log"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:src="@drawable/profile"
+            android:visibility="gone"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Name"
+                android:visibility="gone"
+                android:ems="10"
+                android:id="@+id/et_sign_log_name" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Email Address"
+                android:ems="10"
+                android:id="@+id/et_sign_log_email"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/et_sign_log_pwd"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/b_sign_log_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Confirm"
+        android:textSize="20dp"
+        android:background="@drawable/list_selector" />
+</LinearLayout>

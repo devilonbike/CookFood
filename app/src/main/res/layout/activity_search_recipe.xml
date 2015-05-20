@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.xplorer.cookfood.Activity.SearchRecipeActivity">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:paddingTop="?attr/actionBarSize">
+        <ListView
+            android:id="@+id/lv_search_recipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:background="@color/gray1"
+            android:dividerHeight="8dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:listSelector="@color/gray1"
+            android:footerDividersEnabled="false">
+
+        </ListView>
+        <TextView
+            android:id="@+id/tv_search_recipe_info"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="No results found."
+            android:visibility="gone"
+            android:textColor="@color/gray8"/>
+    </LinearLayout>
+
+</RelativeLayout>

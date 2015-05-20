@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="?attr/actionBarSize"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+
+    tools:context="com.xplorer.cookfood.Activity.NutritionActivity">
+
+
+    <TextView
+        android:id="@+id/tv_nutrition_mineral"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="Potassium - 322 mg
+Phosphorus - 43 mg
+Magnesium - 14 mg
+Calcium - 22 mg
+Sodium - 5 mg
+Iron - 0.81 mg
+Selenium 0.3 mcg
+Manganese - 0.129 mg
+Copper - 0.137 mg
+Zinc - 0.09 mg "
+        android:layout_above="@+id/ll_nutrition_title"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:background="@color/Red"
+        android:padding="5dp"
+        android:layout_margin="5dp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_nutrition_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Minerals"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:background="@color/Red"
+            android:padding="2dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vitamins"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:gravity="end"
+            android:background="@color/CornflowerBlue"
+            android:padding="2dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_nutrition_vitamin"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="Vitamin B1 (thiamine) - 0.046 mg
+Vitamin B2 (riboflavin) - 0.054 mg
+Niacin - 0.329 mg
+Folate - 2 mcg
+Pantothenic Acid - 0.041 mg
+Vitamin B6 - 0.075 mg
+Vitamin C - 1 mg
+Vitamin E - 0.05 mg
+Vitamin K - 1.5 mcg "
+        android:layout_below="@+id/ll_nutrition_title"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:background="@color/CornflowerBlue"
+        android:padding="5dp"
+        android:layout_margin="5dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_nutrition_ing"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/grate"
+        android:scaleType="centerCrop"
+        android:layout_centerInParent="true" />
+</RelativeLayout>

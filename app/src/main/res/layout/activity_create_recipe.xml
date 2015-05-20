@@ -1,0 +1,490 @@
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sl_create_recipe_globle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    sothree:umanoPanelHeight="68dp"
+    sothree:umanoShadowHeight="4dp">
+
+    <RelativeLayout
+        android:id="@+id/rl_create_activity_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize">
+
+        <RelativeLayout
+            android:id="@+id/rl_create_activity_Anim_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ll_create_recipe_player"
+            android:animateLayoutChanges="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/ll_item_product_main"
+                android:padding="5dp">
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbarStyle="outsideOverlay"
+                    android:fillViewport="true"
+                    android:layout_above="@+id/ll_create_recipe_middleLayer">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/ll_create_recipe_top"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/ll_create_recipe_download"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:layout_marginRight="1dp"
+                                android:background="@drawable/list_selector">
+
+                                <ImageView
+                                    android:id="@+id/iv_create_recipe_download"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:padding="5dp"
+                                    android:src="@drawable/saved" />
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:gravity="center"
+                                    android:text="Save Offline" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_create_recipe_like"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:orientation="horizontal"
+                                android:padding="2dp"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="1dp"
+                                android:background="@drawable/list_selector">
+
+                                <ImageView
+                                    android:id="@+id/iv_create_recipe_view"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:padding="5dp"
+                                    android:src="@drawable/views" />
+
+                                <TextView
+                                    android:id="@+id/tv_create_recipe_views"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:gravity="center"
+                                    android:text="5000000 Views" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_create_recipe_proximity"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:orientation="horizontal"
+                                android:padding="2dp"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="1dp"
+                                android:background="@drawable/list_selector">
+
+                                <ImageView
+                                    android:id="@+id/iv_create_recipe_proximity"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:padding="5dp"
+                                    android:src="@drawable/proximity" />
+
+                                <TextView
+                                    android:id="@+id/tv_create_recipe_proximity"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:gravity="center"
+                                    android:text="Proximity Sensor On" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_create_recipe_speak"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@+id/ll_create_recipe_top"
+                            android:padding="2dp"
+                            android:text="hello"
+                            android:background="@color/gray1"
+                            android:textSize="15dp"
+                            android:layout_toRightOf="@+id/vf_create_recepie_ingredient" />
+                    </LinearLayout>
+
+                </ScrollView>
+
+                <LinearLayout
+                    android:id="@+id/ll_create_recipe_middleLayer"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentBottom="true"
+                    android:padding="5dp">
+
+                    <ViewFlipper
+                        android:id="@+id/vf_create_recepie_ingredient"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp">
+
+                    </ViewFlipper>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="2dp"
+                            android:orientation="vertical"
+                            android:layout_weight="1">
+
+                            <Chronometer
+                                android:id="@+id/cm_create_recipe_speak"
+                                android:layout_width="fill_parent"
+                                android:layout_height="0dp"
+                                android:textSize="30dp"
+                                android:gravity="center"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="2"
+                                android:background="@color/gray1">
+
+                            </Chronometer>
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:layout_marginTop="5dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/iv_create_recipe_timerplay"
+                                    android:layout_width="0dp"
+                                    android:layout_height="fill_parent"
+                                    android:src="@drawable/play_recipe"
+                                    android:clickable="true"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/list_selector" />
+
+                                <ImageView
+                                    android:id="@+id/iv_create_recipe_timerreplay"
+                                    android:layout_width="0dp"
+                                    android:layout_height="fill_parent"
+                                    android:src="@drawable/replay"
+                                    android:clickable="true"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/list_selector" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/ll_item_product_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:descendantFocusability="blocksDescendants"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/iv_item_product_action"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/bake" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/tv_item_product_action"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bake"
+                        android:textSize="20dp"
+                        android:textColor="@color/black" />
+
+
+                    <TextView
+                        android:id="@+id/tv_item_product_desc"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bake"
+                        android:ellipsize="end"
+                        android:layout_below="@+id/tv_item_product_action"
+                        android:layout_above="@+id/ll_item_product_info"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_item_product_info"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true">
+
+                        <LinearLayout
+                            android:id="@+id/ll_item_product_info_temp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Temp (°C):"
+                                android:textSize="15dp"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tv_item_product_temp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="40"
+                                android:textSize="15dp"
+                                android:inputType="number" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_item_product_info_stop"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Stop when:"
+                                android:textSize="15dp"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tv_item_product_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="Timer goes off"
+                                android:textSize="15dp"
+                                android:inputType="number" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_create_activity_Anim_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ll_create_recipe_player"
+            android:animateLayoutChanges="true"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start of Recipe"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textSize="30dp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_gravity="center_vertical"
+            android:layout_above="@+id/ll_create_recipe_player"
+
+            android:background="@color/gray_light_8" />
+
+        <LinearLayout
+            android:id="@+id/ll_create_recipe_player"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="@color/gray1"
+            android:layout_alignParentBottom="true">
+
+            <ImageView
+                android:id="@+id/iv_create_recipe_bwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fastbakward"
+                android:clickable="true"
+                android:layout_weight="1"
+                android:background="@drawable/item_selector" />
+
+            <View
+                android:layout_width="2dip"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+
+                android:background="#a8a8a8" />
+
+            <ImageView
+                android:id="@+id/iv_create_recipe_playpause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/play_recipe"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:background="@drawable/item_selector" />
+
+            <View
+                android:layout_width="2dip"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+
+                android:background="#a8a8a8" />
+
+            <ImageView
+                android:id="@+id/iv_create_recipe_stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/stop_recipe"
+                android:clickable="true"
+                android:layout_weight="1"
+                android:background="@drawable/item_selector" />
+
+            <View
+                android:layout_width="2dip"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+
+                android:background="#a8a8a8" />
+
+            <ImageView
+                android:id="@+id/iv_create_recipe_fwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fastforward"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:background="@drawable/item_selector" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_create_recipe_header"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/iv_create_recipe_actionicon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:src="@drawable/action" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_create_recipe_ht"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kitchen Cabinet"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_create_recipe_hd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Access Action and Product"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:clickable="true">
+
+
+            <com.astuetz.PagerSlidingTabStrip
+                android:id="@+id/tabs_action_product"
+                android:layout_width="match_parent"
+                android:layout_height="48dip"
+                app:pstsShouldExpand="true"
+                android:layout_below="@+id/textView" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager_action_product"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                tools:context=".MainActivity" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

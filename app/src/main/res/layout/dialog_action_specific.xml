@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_light_8">
+
+    <LinearLayout
+        android:id="@+id/ll_action_specific_temp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Temperature (°C):"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <SeekBar
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/sb_action_specific_temperature"
+                android:max="500"
+                android:layout_weight="8" />
+
+            <EditText
+                android:id="@+id/et_dialog_action_specific_tempVal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="40"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:layout_weight="2" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_action_specific_stop_criteria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Set Duration:"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:textColor="@color/black" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/sr_action_specific_stop_criteria" />
+
+        <LinearLayout
+            android:id="@+id/ll_action_specific_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <SeekBar
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/sb_action_specific_time"
+                android:max="36000"
+                android:layout_weight="8" />
+
+            <EditText
+                android:id="@+id/et_dialog_action_specific_timeVal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="60"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:layout_weight="2" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/et_action_specific_stop_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            android:textSize="15dp"
+            android:inputType="text"
+            android:maxLines="3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+
+        <Button
+            android:id="@+id/b_dialog_action_specific_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Cancel"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/list_selector"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/b_dialog_action_specific_confirm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Confirm"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/list_selector"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+</LinearLayout>

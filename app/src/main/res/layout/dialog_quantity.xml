@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_light_8"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <Spinner
+            android:id="@+id/spnr_dialog_quantity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8" />
+        <EditText
+            android:id="@+id/et_dialog_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:inputType="numberDecimal"/>
+
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp">
+        <Button
+            android:id="@+id/b_dialog_quantity_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Cancel"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/list_selector"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/b_dialog_quantity_confirm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Confirm"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/list_selector"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+</LinearLayout>

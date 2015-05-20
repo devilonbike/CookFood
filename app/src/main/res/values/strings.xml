@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Cook Food</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_create_recipe">CreateRecipeActivity</string>
+    <string name="title_activity_action">ActionActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_ingredients">IngredientsActivity</string>
+    <string name="title_activity_recipe">RecipeActivity</string>
+    <string name="hint_recipe_name">Search Recipe</string>
+    <string name="title_activity_search_recipe">SearchRecipeActivity</string>
+    <string name="title_activity_search_ingredient">SearchIngredientActivity</string>
+    <string name="hint_ingredient_name">Search Ingredient</string>
+    <string name="title_activity_nutrition">NutritionActivity</string>
+
+</resources>
