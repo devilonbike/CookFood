@@ -41,7 +41,7 @@ public class FlexibleSpaceWithImageRecyclerViewActivity extends BaseActivity imp
 
         mFlexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         mActionBarSize = getActionBarSize();
-        mToolbarColor = getResources().getColor(R.color.primary);
+        mToolbarColor = ContextCompat.getColor(_context,R.color.primary);
 
         mRecyclerView = (ObservableRecyclerView) findViewById(R.id.recycler);
         mRecyclerView.setScrollViewCallbacks(this);

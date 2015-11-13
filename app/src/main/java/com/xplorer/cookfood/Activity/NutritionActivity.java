@@ -21,7 +21,7 @@ import butterknife.InjectView;
 
 public class NutritionActivity extends ActionBarActivity {
     String SearchString;
-    Context mContext;
+    Context _context;
     private static final String TAG = "SearchRecipeActivity";
 
     @InjectView(R.id.tv_nutrition_mineral)
@@ -35,8 +35,8 @@ public class NutritionActivity extends ActionBarActivity {
 
 
 
-    public int ActionBarColor;
-    public int StatusBarColor;
+    public int _actionBarColor;
+    public int _statusBarColor;
 
     String name;
     String vitamin;
@@ -54,17 +54,17 @@ public class NutritionActivity extends ActionBarActivity {
 
     public void InitActionBar() {
 
-        ActionBarColor = getResources().getColor(R.color.CornflowerBlue);
-        StatusBarColor = CookFoodApp.getInstance().getDarkColor(ActionBarColor);
+        _actionBarColor = ContextCompat.getColor(_context,R.color.CornflowerBlue);
+        _statusBarColor = CookFoodApp.getInstance().getDarkColor(_actionBarColor);
 
 
         getSupportActionBar().setTitle("Nutrition ("+name+")");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ActionBarColor));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(_actionBarColor));
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
-            window.setStatusBarColor(StatusBarColor);
+            window.setStatusBarColor(_statusBarColor);
 
         }
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -80,14 +80,14 @@ public class NutritionActivity extends ActionBarActivity {
         mineral= getIntent().getStringExtra("mineral");
         imgurl= getIntent().getStringExtra("imgurl");
 
-        mContext = this;
+        _context = this;
         ButterKnife.inject(this);
 
         InitActionBar();
 
         tv_nutrition_mineral.setText(mineral);
         tv_nutrition_vitamin.setText(vitamin);
-        Picasso.with(mContext).load(imgurl).error(R.drawable.recepi).into(iv_nutrition_ing);
+        Picasso.with(_context).load(imgurl).error(R.drawable.recepi).into(iv_nutrition_ing);
 
 
         return true;

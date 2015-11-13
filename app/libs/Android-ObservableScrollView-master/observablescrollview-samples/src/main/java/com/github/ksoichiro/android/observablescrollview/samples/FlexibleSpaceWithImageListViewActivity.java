@@ -63,7 +63,7 @@ public class FlexibleSpaceWithImageListViewActivity extends BaseActivity impleme
         mFlexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         mFlexibleSpaceShowFabOffset = getResources().getDimensionPixelSize(R.dimen.flexible_space_show_fab_offset);
         mActionBarSize = getActionBarSize();
-        mToolbarColor = getResources().getColor(R.color.primary);
+        mToolbarColor = ContextCompat.getColor(_context,R.color.primary);
 
         mToolbar = findViewById(R.id.toolbar);
         if (!TOOLBAR_IS_STICKY) {

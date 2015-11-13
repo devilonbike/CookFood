@@ -88,7 +88,7 @@ public class ActionProductFragment extends Fragment {
 
         if(SCREEN_ID==0){   //ACTIONS
             actionAdptr = new ActionAdaptor(getActivity());
-            // MultiItemRowListAdapter twoRowAdapter = new MultiItemRowListAdapter(mContext, actionAdptr, 2, 0 );
+            // MultiItemRowListAdapter twoRowAdapter = new MultiItemRowListAdapter(_context, actionAdptr, 2, 0 );
             lv_fragement_action_product.setAdapter(actionAdptr);
             lv_fragement_action_product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

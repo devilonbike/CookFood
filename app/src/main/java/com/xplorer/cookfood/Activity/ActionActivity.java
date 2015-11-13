@@ -47,11 +47,11 @@ public class ActionActivity extends ActionBarActivity {
 
     public int index =0;
     public String ActionName ="";
-    public int ActionBarColor;
-    public int StatusBarColor;
+    public int _actionBarColor;
+    public int _statusBarColor;
     public List<Product> ProdList =new ArrayList<Product>();
 
-    Context mContext;
+    Context _context;
     private static final String TAG = "ActionActivity";
     ProductAdaptor prodAdaptr;
 
@@ -112,7 +112,7 @@ public class ActionActivity extends ActionBarActivity {
             IsProductNew=false;
         }
         justCreated=true;
-        mContext = this;
+        _context = this;
         ButterKnife.inject(this);
     }
 
@@ -161,7 +161,7 @@ public class ActionActivity extends ActionBarActivity {
         index = CookFoodApp.getInstance().currentAction;
         ActionName = CookFoodApp.getInstance().Actions[index];
         tv_aa_desc.setText(CookFoodApp.getInstance().ActionDescription.get(ActionName));
-        Picasso.with(mContext).load(CookFoodApp.getInstance().ActionImg.get(ActionName)).error(R.drawable.ic_launcher).into(iv_action_icon);
+        Picasso.with(_context).load(CookFoodApp.getInstance().ActionImg.get(ActionName)).error(R.drawable.ic_launcher).into(iv_action_icon);
 
     }
 
@@ -171,27 +171,27 @@ public class ActionActivity extends ActionBarActivity {
 
 
         if(CookFoodApp.getInstance().palletColor.containsKey(ActionName)) {
-            ActionBarColor = CookFoodApp.getInstance().palletColor.get(ActionName);
+            _actionBarColor = CookFoodApp.getInstance().palletColor.get(ActionName);
         }else{
             Random rnd = new Random();
-            ActionBarColor = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+            _actionBarColor = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
         }
 
 
-        StatusBarColor = CookFoodApp.getInstance().getDarkColor(ActionBarColor);
+        _statusBarColor = CookFoodApp.getInstance().getDarkColor(_actionBarColor);
 
         int c = R.color.Red;
         Log.d("c", c+"");
-        Log.d("ActionBarColor", ActionBarColor+"");
-        Log.d("StatusBarColor", StatusBarColor+"");
+        Log.d("_actionBarColor", _actionBarColor+"");
+        Log.d("_statusBarColor", _statusBarColor+"");
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ActionBarColor));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(_actionBarColor));
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             Window window = getWindow();
-            window.setStatusBarColor(StatusBarColor);
+            window.setStatusBarColor(_statusBarColor);
 
         }
 
@@ -200,12 +200,12 @@ public class ActionActivity extends ActionBarActivity {
 
 
     public void InitMainScreen(){
-        iv_action_add.setColorFilter(ActionBarColor);
-        iv_action_addbg.setColorFilter(StatusBarColor);
+        iv_action_add.setColorFilter(_actionBarColor);
+        iv_action_addbg.setColorFilter(_statusBarColor);
 
-        ll_action_activity_info.setBackgroundColor(ActionBarColor);
-        ll_action_activity_title.setBackgroundColor(StatusBarColor);
-        b_dialog_quantity_confirm.setBackgroundColor(ActionBarColor);
+        ll_action_activity_info.setBackgroundColor(_actionBarColor);
+        ll_action_activity_title.setBackgroundColor(_statusBarColor);
+        b_dialog_quantity_confirm.setBackgroundColor(_actionBarColor);
 
         iv_action_add.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -214,21 +214,21 @@ public class ActionActivity extends ActionBarActivity {
                 switch (arg1.getAction()) {
 
                     case MotionEvent.ACTION_UP: {
-                        iv_action_add.setColorFilter(ActionBarColor);
-                        iv_action_addbg.setColorFilter(StatusBarColor);
+                        iv_action_add.setColorFilter(_actionBarColor);
+                        iv_action_addbg.setColorFilter(_statusBarColor);
                         CookFoodApp.getInstance().CurrentCustomIngredient=null;
                         startActivity(new Intent(ActionActivity.this, IngredientsActivity.class));
                         break;
                     }
                     case MotionEvent.ACTION_DOWN: {
-                        iv_action_add.setColorFilter(StatusBarColor);
-                        iv_action_addbg.setColorFilter(ActionBarColor);
+                        iv_action_add.setColorFilter(_statusBarColor);
+                        iv_action_addbg.setColorFilter(_actionBarColor);
 
                         break;
                     }
                     case MotionEvent.ACTION_OUTSIDE: {
-                        iv_action_add.setColorFilter(ActionBarColor);
-                        iv_action_addbg.setColorFilter(StatusBarColor);
+                        iv_action_add.setColorFilter(_actionBarColor);
+                        iv_action_addbg.setColorFilter(_statusBarColor);
 
                         break;
                     }
@@ -249,7 +249,7 @@ public class ActionActivity extends ActionBarActivity {
                 setActionSpecific();
             }
         });
-        prodAdaptr = new ProductAdaptor(mContext, ProdList, "ActionActivity");
+        prodAdaptr = new ProductAdaptor(_context, ProdList, "ActionActivity");
 
         if(ProdList.size()==0){
             tv_action_activity_ingredient.setVisibility(View.VISIBLE);
@@ -268,7 +268,7 @@ public class ActionActivity extends ActionBarActivity {
     public void setActionSpecific() {
         //if(CookFoodApp.getInstance().ActionTemp.get(ActionName) || CookFoodApp.getInstance().ActionStopCriteria.get(ActionName))
 
-        final Dialog dialog = new Dialog(mContext);
+        final Dialog dialog = new Dialog(_context);
         dialog.setContentView(R.layout.dialog_action_specific);
 
         dialog.setTitle("Set "+ActionName+" specific options.");
@@ -395,7 +395,7 @@ public class ActionActivity extends ActionBarActivity {
                 "Use Timer (In Minutes)",
                 "Provide Description Criteria",
         };
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, CriteriaTypes);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(_context, android.R.layout.simple_spinner_item, CriteriaTypes);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnr_dialog_criteria.setAdapter(dataAdapter);
 
@@ -455,7 +455,7 @@ public class ActionActivity extends ActionBarActivity {
                     final String timeVal = et_dialog_action_specific_timeVal.getText().toString();
 
                     if(timeVal.equalsIgnoreCase("")){
-                        Toast.makeText(mContext, "Timer cannot be empty",Toast.LENGTH_LONG ).show();
+                        Toast.makeText(_context, "Timer cannot be empty",Toast.LENGTH_LONG ).show();
                         return;
                     }
                     p.setTime(timeVal);
@@ -465,7 +465,7 @@ public class ActionActivity extends ActionBarActivity {
                     final String timeVal = et_dialog_action_specific_timeVal.getText().toString();
 
                     if(desc.equalsIgnoreCase("")){
-                        Toast.makeText(mContext, "Stop description cannot be empty",Toast.LENGTH_LONG ).show();
+                        Toast.makeText(_context, "Stop description cannot be empty",Toast.LENGTH_LONG ).show();
                         return;
                     }
                     p.setTime(timeVal);
@@ -509,7 +509,7 @@ public class ActionActivity extends ActionBarActivity {
             ProdList = prodAdaptr.getList();
             Log.d("ProdList", ProdList.toString());
             if(ProdList.size()==0){
-                Toast.makeText(mContext, "Cannot save empty action, add some ingredients", Toast.LENGTH_SHORT).show();
+                Toast.makeText(_context, "Cannot save empty action, add some ingredients", Toast.LENGTH_SHORT).show();
                 return true;
             }
             p.setAction(ActionName);
@@ -524,7 +524,7 @@ public class ActionActivity extends ActionBarActivity {
             }
 
 
-            Toast.makeText(mContext, "Saved custom product successfully.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(_context, "Saved custom product successfully.", Toast.LENGTH_SHORT).show();
 
 
             this.finish();

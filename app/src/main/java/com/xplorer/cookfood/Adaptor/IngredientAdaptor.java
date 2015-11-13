@@ -37,7 +37,7 @@ import butterknife.InjectView;
  * Created by Raghavendra on 18-03-2015.
  */
 public class IngredientAdaptor extends BaseAdapter {
-    private Context mContext;
+    private Context _context;
 
     private List<Ingredients> ingredientItems;
     private String TAG = "IngredientsAdaptor";
@@ -46,7 +46,7 @@ public class IngredientAdaptor extends BaseAdapter {
 
     public IngredientAdaptor(Context context, List<Ingredients> list, int ingredientType) {
         ingredientItems = list;
-        mContext = context;
+        _context = context;
         IngredientType = ingredientType;
         if(IngredientType!=-1) TAG += " " + CookFoodApp.getInstance().IngredientsTitle[ingredientType];
 
@@ -73,9 +73,9 @@ public class IngredientAdaptor extends BaseAdapter {
 
         ViewHolder holder = null;
         if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.item_ingredient, viewGroup, false);
-            holder = new ViewHolder(view, mContext);
+            holder = new ViewHolder(view, _context);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -106,13 +106,13 @@ public class IngredientAdaptor extends BaseAdapter {
                     switch (arg1.getAction()) {
 
                         case MotionEvent.ACTION_UP: {
-                            Intent nutIntent = new Intent(mContext, NutritionActivity.class);
+                            Intent nutIntent = new Intent(_context, NutritionActivity.class);
                             nutIntent.putExtra("name", ing.getName());
                             nutIntent.putExtra("mineral", ing.getMinerals());
                             nutIntent.putExtra("vitamin", ing.getVitamins());
                             nutIntent.putExtra("imgurl", ing.getImageFile().getUrl());
 
-                            mContext.startActivity(nutIntent);
+                            _context.startActivity(nutIntent);
 
 
 
@@ -129,7 +129,7 @@ public class IngredientAdaptor extends BaseAdapter {
         }
 
 
-        Picasso.with(mContext).load(ingredientItems.get(i).getImageFile().getUrl()).
+        Picasso.with(_context).load(ingredientItems.get(i).getImageFile().getUrl()).
                 error(R.drawable.error_image).into(FinalHolder.iv_item_ingredient_actionimg, new com.squareup.picasso.Callback() {
             @Override
             public void onSuccess() {
@@ -149,7 +149,7 @@ public class IngredientAdaptor extends BaseAdapter {
     }
 
     public void setQuantity(final int pos) {
-        final Dialog dialog = new Dialog(mContext);
+        final Dialog dialog = new Dialog(_context);
         dialog.setContentView(R.layout.dialog_quantity);
 
         dialog.setTitle("Set quantity of ingredient");
@@ -171,7 +171,7 @@ public class IngredientAdaptor extends BaseAdapter {
                 "As needed",
                 "A few"
         };
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, QuantityTypes);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(_context, android.R.layout.simple_spinner_item, QuantityTypes);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnr_dialog_quantity.setAdapter(dataAdapter);
 
@@ -209,10 +209,10 @@ public class IngredientAdaptor extends BaseAdapter {
                     CookFoodApp.getInstance().CurrentCustomIngredient.setQuantityCount(quantityCount);
 
                     dialog.dismiss();
-                    ((Activity) mContext).finish();
+                    ((Activity) _context).finish();
                 } else {
                     if (quantityCount.equalsIgnoreCase("")) {
-                        Toast.makeText(mContext, "Enter amount of selected quantity type", Toast.LENGTH_LONG).show();
+                        Toast.makeText(_context, "Enter amount of selected quantity type", Toast.LENGTH_LONG).show();
                     } else {
                         CookFoodApp.getInstance().CurrentCustomIngredient = new Product();
                         CookFoodApp.getInstance().CurrentCustomIngredient.setAction("none");
@@ -221,7 +221,7 @@ public class IngredientAdaptor extends BaseAdapter {
                         CookFoodApp.getInstance().CurrentCustomIngredient.setQuantityCount(quantityCount);
 
                         dialog.dismiss();
-                        ((Activity) mContext).finish();
+                        ((Activity) _context).finish();
                     }
                 }
 

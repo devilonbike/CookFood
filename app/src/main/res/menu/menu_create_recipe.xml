@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.xplorer.cookfood.Activity.CreateRecipeActivity">
+    tools:context="com.xplorer.cookfood.Activity.CreateRecipe.CreateRecipeActivity">
     <item android:id="@+id/action_menu_create_recipe_save"
         android:title="SAVE"
 

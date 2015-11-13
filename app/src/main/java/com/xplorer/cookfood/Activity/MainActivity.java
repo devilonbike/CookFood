@@ -76,11 +76,11 @@ import butterknife.InjectView;
 
 public class MainActivity extends ActionBarActivity {
 
-    Context mContext;
+    Context _context;
     private static final String TAG = "MainActivity";
 
-    public int ActionBarColor;
-    public int StatusBarColor;
+    public int _actionBarColor;
+    public int _statusBarColor;
     Dialog dialog;
     ImageView iv_dialog_sign_log;
     UserInfo user;
@@ -123,11 +123,11 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mContext = this;
+        _context = this;
         ButterKnife.inject(this);
-        dialog = new Dialog(mContext);
+        dialog = new Dialog(_context);
         InitActionBar();
-        LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater mInflater = (LayoutInflater) _context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         footerView = mInflater.inflate(R.layout.footer_loadmore, null, false);
         GotAllData=false;
         loadingMore=false;
@@ -152,17 +152,17 @@ public class MainActivity extends ActionBarActivity {
 
     public void InitActionBar() {
 
-        ActionBarColor = getResources().getColor(R.color.LimeGreen);
-        StatusBarColor = CookFoodApp.getInstance().getDarkColor(ActionBarColor);
+        _actionBarColor = ContextCompat.getColor(_context,R.color.LimeGreen);
+        _statusBarColor = CookFoodApp.getInstance().getDarkColor(_actionBarColor);
 
 
         getSupportActionBar().setTitle("Cook Food");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ActionBarColor));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(_actionBarColor));
         getSupportActionBar().setHomeButtonEnabled(true);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             Window window = getWindow();
-            window.setStatusBarColor(StatusBarColor);
+            window.setStatusBarColor(_statusBarColor);
 
         }
     }
@@ -243,13 +243,13 @@ public class MainActivity extends ActionBarActivity {
                 final String email = et_dialog_email.getText().toString();
                 String pswd = et_dialog_pwd.getText().toString();
                 if(name.equalsIgnoreCase("") && !login){
-                    Toast.makeText(mContext, "Please Enter Name.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_context, "Please Enter Name.", Toast.LENGTH_SHORT).show();
                 }else if(email.equalsIgnoreCase("")){
-                    Toast.makeText(mContext, "Please Enter Email Address.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_context, "Please Enter Email Address.", Toast.LENGTH_SHORT).show();
                 }else if(pswd.equalsIgnoreCase("")){
-                    Toast.makeText(mContext, "Please Enter Password.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_context, "Please Enter Password.", Toast.LENGTH_SHORT).show();
                 }else{
-                    CookFoodApp.getInstance().RunPreLoader(mContext);
+                    CookFoodApp.getInstance().RunPreLoader(_context);
                     user = new UserInfo();
                     user.setName(name);
                     user.setUsername(email);
@@ -261,14 +261,14 @@ public class MainActivity extends ActionBarActivity {
                             public void done(ParseUser parseUser, ParseException e) {
                                 if(e!=null){
                                     Log.e(TAG, e.toString());
-                                    Toast.makeText(mContext, "Invalid Login Credentials", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(_context, "Invalid Login Credentials", Toast.LENGTH_SHORT).show();
                                     CookFoodApp.getInstance().pd.dismiss();
                                     return;
                                 }else if(parseUser!=null){
                                     CookFoodApp.getInstance().pd.dismiss();
                                     CookFoodApp.getInstance().user = (UserInfo) parseUser;
                                     Log.d(TAG,"Log in "+CookFoodApp.getInstance().user.getName());
-                                    Toast.makeText(mContext, "User Logged in successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(_context, "User Logged in successfully", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
                                     AfterUserLoggedIn();
                                 }
@@ -288,7 +288,7 @@ public class MainActivity extends ActionBarActivity {
                                 if(e!=null){
                                     Log.e(TAG, e.toString());
 
-                                    Toast.makeText(mContext, "Please check your Internet connection.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(_context, "Please check your Internet connection.", Toast.LENGTH_SHORT).show();
 
                                     CookFoodApp.getInstance().pd.dismiss();
                                     dialog.dismiss();
@@ -303,9 +303,9 @@ public class MainActivity extends ActionBarActivity {
                                             Log.e(TAG, e.toString());
 
                                             if(e.toString().equalsIgnoreCase("com.parse.ParseException: username raghav.bazari@gmail.com already taken")){
-                                                Toast.makeText(mContext, "Email address, \""+email+"\" already taken.", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(_context, "Email address, \""+email+"\" already taken.", Toast.LENGTH_LONG).show();
                                             }else{
-                                                Toast.makeText(mContext, "Please check your Internet connection.", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(_context, "Please check your Internet connection.", Toast.LENGTH_SHORT).show();
 
                                             }
                                             CookFoodApp.getInstance().pd.dismiss();
@@ -314,7 +314,7 @@ public class MainActivity extends ActionBarActivity {
 
                                         CookFoodApp.getInstance().pd.dismiss();
                                         CookFoodApp.getInstance().user = user;
-                                        Toast.makeText(mContext, "You Signed up Successfully", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(_context, "You Signed up Successfully", Toast.LENGTH_SHORT).show();
 
                                         dialog.dismiss();
                                         AfterUserLoggedIn();
@@ -329,7 +329,7 @@ public class MainActivity extends ActionBarActivity {
 
             }
         });
-        ColorDrawable colorDrawable = new ColorDrawable(StatusBarColor);
+        ColorDrawable colorDrawable = new ColorDrawable(_statusBarColor);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialog.getWindow().getAttributes());
         lp.width = (int) (WindowManager.LayoutParams.MATCH_PARENT);
@@ -354,7 +354,7 @@ public class MainActivity extends ActionBarActivity {
         iv_dialog_sign_log = (ImageView) dialog.findViewById(R.id.iv_dialog_sign_log);
 
         if(CookFoodApp.getInstance().user==null){
-            Toast.makeText(mContext, "Please Sign up first", Toast.LENGTH_SHORT).show();
+            Toast.makeText(_context, "Please Sign up first", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -363,7 +363,7 @@ public class MainActivity extends ActionBarActivity {
         et_dialog_pwd.setText("********");
         et_dialog_name.setVisibility(View.VISIBLE);
         iv_dialog_sign_log.setVisibility(View.VISIBLE);
-        Picasso.with(mContext).load(CookFoodApp.getInstance().user.getImageFile().getUrl()).error(R.drawable.error_image).into(iv_dialog_sign_log);
+        Picasso.with(_context).load(CookFoodApp.getInstance().user.getImageFile().getUrl()).error(R.drawable.error_image).into(iv_dialog_sign_log);
 
         final Button b_sign_log_confirm = (Button) dialog.findViewById(R.id.b_sign_log_confirm);
 
@@ -380,13 +380,13 @@ public class MainActivity extends ActionBarActivity {
                 final String email = et_dialog_email.getText().toString();
                 final String pswd = et_dialog_pwd.getText().toString();
                 if(name.equalsIgnoreCase("")){
-                    Toast.makeText(mContext, "Please Enter Name.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_context, "Please Enter Name.", Toast.LENGTH_SHORT).show();
                 }else if(email.equalsIgnoreCase("")){
-                    Toast.makeText(mContext, "Please Enter Email Address.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_context, "Please Enter Email Address.", Toast.LENGTH_SHORT).show();
                 }else if(pswd.equalsIgnoreCase("")){
-                    Toast.makeText(mContext, "Please Enter Password.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_context, "Please Enter Password.", Toast.LENGTH_SHORT).show();
                 }else {
-                    CookFoodApp.getInstance().RunPreLoader(mContext);
+                    CookFoodApp.getInstance().RunPreLoader(_context);
 
 
                     Bitmap bitmap = ((BitmapDrawable) iv_dialog_sign_log.getDrawable()).getBitmap();
@@ -402,7 +402,7 @@ public class MainActivity extends ActionBarActivity {
                                 Log.e(TAG + " (while uploading)", e.toString());
                                 CookFoodApp.getInstance().pd.dismiss();
                                 dialog.dismiss();
-                                Toast.makeText(mContext, "Please check your Internet connection", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(_context, "Please check your Internet connection", Toast.LENGTH_SHORT).show();
                                 return;
                             }
 
@@ -417,12 +417,12 @@ public class MainActivity extends ActionBarActivity {
                                         Log.e(TAG, e.toString());
                                         CookFoodApp.getInstance().pd.dismiss();
                                         dialog.dismiss();
-                                        Toast.makeText(mContext, "Please check your Internet connection", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(_context, "Please check your Internet connection", Toast.LENGTH_SHORT).show();
                                         return;
                                     }
 
                                     CookFoodApp.getInstance().pd.dismiss();
-                                    Toast.makeText(mContext, "Profile saved successfully.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(_context, "Profile saved successfully.", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
                                 }
                             });
@@ -434,7 +434,7 @@ public class MainActivity extends ActionBarActivity {
 
             }
         });
-        ColorDrawable colorDrawable = new ColorDrawable(StatusBarColor);
+        ColorDrawable colorDrawable = new ColorDrawable(_statusBarColor);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialog.getWindow().getAttributes());
         lp.width = (int) (WindowManager.LayoutParams.MATCH_PARENT);
@@ -460,9 +460,9 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-        drawerAdptr = new DrawerAdaptor(mContext);
+        drawerAdptr = new DrawerAdaptor(_context);
 
-        LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater mInflater = (LayoutInflater) _context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View headerView = mInflater.inflate(R.layout.item_header_profile, null, false);
 
         TextView tv_header_profile_name = (TextView) headerView.findViewById(R.id.tv_header_profile_name);
@@ -472,7 +472,7 @@ public class MainActivity extends ActionBarActivity {
         if(CookFoodApp.getInstance().user!=null) {
             tv_header_profile_name.setText(CookFoodApp.getInstance().user.getName());
             tv_header_profile_email.setText(CookFoodApp.getInstance().user.getUsername());
-            Picasso.with(mContext).load(CookFoodApp.getInstance().user.getImageFile().getUrl()).error(R.drawable.error_image).into(iv_header_profile_image);
+            Picasso.with(_context).load(CookFoodApp.getInstance().user.getImageFile().getUrl()).error(R.drawable.error_image).into(iv_header_profile_image);
         }else{
             Log.d(TAG, "Drawer Error, user is null");
         }
@@ -488,13 +488,13 @@ public class MainActivity extends ActionBarActivity {
                     dialogProfile();
                 }else if (i == 1) {   //create recipe
                     ReloadList=true;
-                    startActivity(new Intent(mContext, CreateRecipeActivity.class).putExtra("command","create").putExtra("RecipeDataObjectId", "none"));
+                    startActivity(new Intent(_context, CreateRecipeActivity.class).putExtra("command","create").putExtra("RecipeDataObjectId", "none"));
 
                 } else if(i==2){    //My Recipe
-                    startActivity(new Intent(mContext, RecipeActivity.class).putExtra("TITLE","My Recipes"));
+                    startActivity(new Intent(_context, RecipeActivity.class).putExtra("TITLE","My Recipes"));
 
                 }else if(i==3){ //Saved Recipe
-                    startActivity(new Intent(mContext, RecipeActivity.class).putExtra("TITLE","Saved Recipes"));
+                    startActivity(new Intent(_context, RecipeActivity.class).putExtra("TITLE","Saved Recipes"));
 
                 }
                 mDrawerLayout.closeDrawers();
@@ -526,7 +526,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void setUpList(){
         RecipeList = new ArrayList<RecipeData>();
-        recpAdapt = new RecipeAdaptor(mContext,RecipeList);
+        recpAdapt = new RecipeAdaptor(_context,RecipeList);
 
         GotAllData=false;
         loadingMore=false;
@@ -565,7 +565,7 @@ public class MainActivity extends ActionBarActivity {
 
             String RecipeDataObjectId =r.getObjectId();
             Log.d(TAG+" Click", RecipeDataObjectId);
-            startActivity(new Intent(mContext, CreateRecipeActivity.class).putExtra("command","play").putExtra("RecipeDataObjectId",RecipeDataObjectId));
+            startActivity(new Intent(_context, CreateRecipeActivity.class).putExtra("command","play").putExtra("RecipeDataObjectId",RecipeDataObjectId));
 
             }
         });
@@ -792,8 +792,8 @@ public class MainActivity extends ActionBarActivity {
         LinearLayout linearLayout2 = (LinearLayout) linearLayout1.getChildAt(2);
         LinearLayout linearLayout3 = (LinearLayout) linearLayout2.getChildAt(1);
         AutoCompleteTextView searchText = (AutoCompleteTextView) linearLayout3.getChildAt(0);
-        searchText.setHintTextColor(getResources().getColor(R.color.white));
-        searchText.setTextColor(getResources().getColor(R.color.white));
+        searchText.setHintTextColor(ContextCompat.getColor(_context,R.color.white));
+        searchText.setTextColor(ContextCompat.getColor(_context,R.color.white));
 
         MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
             @Override

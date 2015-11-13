@@ -19,12 +19,12 @@ import com.xplorer.cookfood.R;
  * Created by Raghavendra on 25-03-2015.
  */
 public class DrawerAdaptor  extends BaseAdapter {
-    private Context mContext;
+    private Context _context;
     String[] drawerCandidate = {};
     int[] drawerCandidateImg = {};
 
-    public DrawerAdaptor(Context mContext) {
-        this.mContext = mContext;
+    public DrawerAdaptor(Context _context) {
+        this._context = _context;
         this.drawerCandidate = CookFoodApp.getInstance().DrawerItems;
         this.drawerCandidateImg = CookFoodApp.getInstance().DrawerItemsImages;
     }
@@ -48,7 +48,7 @@ public class DrawerAdaptor  extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater mInflater = (LayoutInflater) _context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.item_drawer, parent, false);
         }
 
@@ -61,7 +61,7 @@ public class DrawerAdaptor  extends BaseAdapter {
 
 
         itemTxt.setText(drawerCandidate[position].toString());
-        Picasso.with(mContext).load(drawerCandidateImg[position]).error(R.drawable.error_image).into(imgView);
+        Picasso.with(_context).load(drawerCandidateImg[position]).error(R.drawable.error_image).into(imgView);
 
         return convertView;
     }

@@ -29,11 +29,11 @@ import butterknife.InjectView;
  */
 public class RecipeAdaptor extends BaseAdapter {
 
-    Context mContext;
+    Context _context;
     public List<RecipeData> ProductList;
 
     public RecipeAdaptor(Context context, List<RecipeData> productList) {
-        mContext = context;
+        _context = context;
         ProductList = productList;
     }
 
@@ -57,9 +57,9 @@ public class RecipeAdaptor extends BaseAdapter {
         ViewHolder holder = null;
 
         if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.item_recipe, parent, false);
-            holder = new ViewHolder(view, mContext);
+            holder = new ViewHolder(view, _context);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -70,7 +70,7 @@ public class RecipeAdaptor extends BaseAdapter {
 
         RecipeData p = ProductList.get(i);
 
-        Picasso.with(mContext).load(p.getImageFile().getUrl()).error(R.drawable.recepi).into(FinalHolder.iv_item_recipe_food);
+        Picasso.with(_context).load(p.getImageFile().getUrl()).error(R.drawable.recepi).into(FinalHolder.iv_item_recipe_food);
         holder.tv_item_recipe_title.setText(CookFoodApp.getInstance().UpperCaseEachWord(p.getTitle()));
         if(p.getDescription().equalsIgnoreCase("")){
             holder.tv_item_recipe_desc.setVisibility(View.GONE);
@@ -99,7 +99,7 @@ public class RecipeAdaptor extends BaseAdapter {
                 List<UserInfo> users_ = (List<UserInfo>) (List<?>) parseUsers;
                 UserInfo usr = users_.get(0);
                 FinalHolder.tv_item_recipe_ownername.setText(usr.getName());
-                Picasso.with(mContext).load(usr.getImageFile().getUrl()).error(R.drawable.profile).into(FinalHolder.iv_item_recipe_owner);
+                Picasso.with(_context).load(usr.getImageFile().getUrl()).error(R.drawable.profile).into(FinalHolder.iv_item_recipe_owner);
 
             }
         });

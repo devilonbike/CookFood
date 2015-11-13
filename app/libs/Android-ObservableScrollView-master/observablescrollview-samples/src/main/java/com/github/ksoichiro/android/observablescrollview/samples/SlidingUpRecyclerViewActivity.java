@@ -48,12 +48,12 @@ public class SlidingUpRecyclerViewActivity extends SlidingUpBaseActivity<Observa
     }
 
     public static class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
-        private Context mContext;
+        private Context _context;
         private LayoutInflater mInflater;
         private ArrayList<String> mItems;
 
         public CustomAdapter(Context context, ArrayList<String> items) {
-            mContext = context;
+            _context = context;
             mInflater = LayoutInflater.from(context);
             mItems = items;
         }
@@ -65,7 +65,7 @@ public class SlidingUpRecyclerViewActivity extends SlidingUpBaseActivity<Observa
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new ViewHolder(mContext, mInflater.inflate(android.R.layout.simple_list_item_1, parent, false));
+            return new ViewHolder(_context, mInflater.inflate(android.R.layout.simple_list_item_1, parent, false));
         }
 
         @Override

@@ -93,7 +93,7 @@ public abstract class SlidingUpBaseActivity<S extends Scrollable> extends BaseAc
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
 
-        mToolbarColor = getResources().getColor(R.color.primary);
+        mToolbarColor = ContextCompat.getColor(_context,R.color.primary);
         mToolbar.setBackgroundColor(Color.TRANSPARENT);
         mToolbar.setTitle("");
 
@@ -102,7 +102,7 @@ public abstract class SlidingUpBaseActivity<S extends Scrollable> extends BaseAc
         mHeaderBarHeight = getResources().getDimensionPixelSize(R.dimen.header_bar_height);
         mSlidingSlop = getResources().getDimensionPixelSize(R.dimen.sliding_slop);
         mActionBarSize = getActionBarSize();
-        mColorPrimary = getResources().getColor(R.color.primary);
+        mColorPrimary = ContextCompat.getColor(_context,R.color.primary);
         mSlidingHeaderBlueSize = getResources().getDimensionPixelSize(R.dimen.sliding_overlay_blur_size);
 
         mHeader = findViewById(R.id.header);

@@ -38,14 +38,14 @@ import butterknife.InjectView;
  */
 public class RecipeEditAdaptor extends BaseAdapter {
 
-    Context mContext;
+    Context _context;
     public List<RecipeData> ProductList;
     private static final String TAG = "RecipeEditAdaptor";
     int RecordCounter;
     int FoundCounter;
 
     public RecipeEditAdaptor(Context context, List<RecipeData> productList) {
-        mContext = context;
+        _context = context;
         ProductList = productList;
     }
 
@@ -69,9 +69,9 @@ public class RecipeEditAdaptor extends BaseAdapter {
         ViewHolder holder = null;
 
         if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.item_recipe_edit, parent, false);
-            holder = new ViewHolder(view, mContext);
+            holder = new ViewHolder(view, _context);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -83,7 +83,7 @@ public class RecipeEditAdaptor extends BaseAdapter {
         final RecipeData p = ProductList.get(i);
 
         if (p.getImageFile() != null)
-            Picasso.with(mContext).load(p.getImageFile().getUrl()).error(R.drawable.recepi).into(FinalHolder.iv_item_recipe_food);
+            Picasso.with(_context).load(p.getImageFile().getUrl()).error(R.drawable.recepi).into(FinalHolder.iv_item_recipe_food);
         holder.tv_item_recipe_title.setText(CookFoodApp.getInstance().UpperCaseEachWord(p.getTitle()));
         if (p.getDescription().equalsIgnoreCase("")) {
             holder.tv_item_recipe_desc.setVisibility(View.GONE);
@@ -103,7 +103,7 @@ public class RecipeEditAdaptor extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 String RecipeDataObjectId = p.getObjectId();
-                mContext.startActivity(new Intent(mContext, CreateRecipeActivity.class).putExtra("command", "edit").putExtra("RecipeDataObjectId", RecipeDataObjectId));
+                _context.startActivity(new Intent(_context, CreateRecipeActivity.class).putExtra("command", "edit").putExtra("RecipeDataObjectId", RecipeDataObjectId));
 
             }
         });
@@ -129,7 +129,7 @@ public class RecipeEditAdaptor extends BaseAdapter {
                 p.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        Toast.makeText(mContext, "Saved change successfully", Toast.LENGTH_LONG).show();
+                        Toast.makeText(_context, "Saved change successfully", Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -155,7 +155,7 @@ public class RecipeEditAdaptor extends BaseAdapter {
                 List<UserInfo> users_ = (List<UserInfo>) (List<?>) parseUsers;
                 UserInfo usr = users_.get(0);
                 FinalHolder.tv_item_recipe_ownername.setText(usr.getName());
-                Picasso.with(mContext).load(usr.getImageFile().getUrl()).error(R.drawable.profile).into(FinalHolder.iv_item_recipe_owner);
+                Picasso.with(_context).load(usr.getImageFile().getUrl()).error(R.drawable.profile).into(FinalHolder.iv_item_recipe_owner);
 
             }
         });
@@ -168,7 +168,7 @@ public class RecipeEditAdaptor extends BaseAdapter {
         Log.d(TAG, "DeleteProductRecipe");
         ParseQuery<Product> query = ParseQuery.getQuery("Product");
         query.whereEqualTo("RecipeDataId", RecipeObjectId);
-        CookFoodApp.getInstance().RunPreLoader(mContext);
+        CookFoodApp.getInstance().RunPreLoader(_context);
 
         query.findInBackground(new FindCallback<Product>() {
                                    @Override
@@ -176,7 +176,7 @@ public class RecipeEditAdaptor extends BaseAdapter {
 
                                        if (e != null) {
                                            Log.d(TAG, e.toString());
-                                           Toast.makeText(mContext, "Please check your Internet connection", Toast.LENGTH_LONG).show();
+                                           Toast.makeText(_context, "Please check your Internet connection", Toast.LENGTH_LONG).show();
                                            CookFoodApp.getInstance().pd.dismiss();
                                            return;
                                        }
@@ -223,7 +223,7 @@ public class RecipeEditAdaptor extends BaseAdapter {
 
                 if (e != null || RecipeDataList.size() == 0) {
                     if (e != null) Log.d(TAG, e.toString());
-                    Toast.makeText(mContext, "Please check your Internet connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(_context, "Please check your Internet connection", Toast.LENGTH_LONG).show();
                     CookFoodApp.getInstance().pd.dismiss();
                     return;
                 }
@@ -245,7 +245,7 @@ public class RecipeEditAdaptor extends BaseAdapter {
     }
 
     public void AskToDelete(final String RecipeObjectId, final int pos) {
-        AlertDialog.Builder adb = new AlertDialog.Builder(mContext)
+        AlertDialog.Builder adb = new AlertDialog.Builder(_context)
                 .setTitle("Delete Recipe")
                 .setMessage("Are you sure you want to delete this recipe ?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

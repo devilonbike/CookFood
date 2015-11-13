@@ -32,7 +32,7 @@ import butterknife.InjectView;
  * Created by Raghavendra on 22-03-2015.
  */
 public class ProductAdaptor extends BaseAdapter {
-    private Context mContext;
+    private Context _context;
     String TAG = "ProductAdaptor";
     public List<Product> ProductList;
     public String from = "";
@@ -40,7 +40,7 @@ public class ProductAdaptor extends BaseAdapter {
     public int DoneProductDeleted;
 
     public ProductAdaptor(Context context, List<Product> productListArg, String fromstr) {
-        mContext = context;
+        _context = context;
         ProductList = productListArg;
         this.from = fromstr;
     }
@@ -80,9 +80,9 @@ public class ProductAdaptor extends BaseAdapter {
         ViewHolder holder = null;
 
         if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.item_product, viewGroup, false);
-            holder = new ViewHolder(view, mContext);
+            holder = new ViewHolder(view, _context);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -95,13 +95,13 @@ public class ProductAdaptor extends BaseAdapter {
         int Numbering =i+1;
         if (NameAction.equalsIgnoreCase("none")) {
             Ingredients ing = ProductList.get(i).getIngredient();
-            Picasso.with(mContext).load(ing.getImageFile().getUrl()).error(R.drawable.error_image).into(FinalHolder.iv_item_product_action);
+            Picasso.with(_context).load(ing.getImageFile().getUrl()).error(R.drawable.error_image).into(FinalHolder.iv_item_product_action);
             holder.tv_item_product_action.setText(Numbering+". "+ing.getName());
             String Desc = ing.getNameHindi()+"\n"+ProductList.get(i).getQuantityCount()+" "+ProductList.get(i).getQuantityType();
             holder.tv_item_product_desc.setText(Desc);
             holder.ll_item_product_info.setVisibility(View.GONE);
         } else {
-            Picasso.with(mContext).load(CookFoodApp.getInstance().ActionImg.get(NameAction)).error(R.drawable.error_image).into(FinalHolder.iv_item_product_action);
+            Picasso.with(_context).load(CookFoodApp.getInstance().ActionImg.get(NameAction)).error(R.drawable.error_image).into(FinalHolder.iv_item_product_action);
             holder.tv_item_product_action.setText(Numbering+". "+NameAction);
             String Desc = "";
 
@@ -158,7 +158,7 @@ public class ProductAdaptor extends BaseAdapter {
     }
     public void AskToDelete(final int pos){
 
-        AlertDialog.Builder adb = new AlertDialog.Builder(mContext)
+        AlertDialog.Builder adb = new AlertDialog.Builder(_context)
                 .setTitle("Delete Product")
                 .setMessage("All other associated products with this will also be deleted, Are you sure you want to delete this product?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -178,7 +178,7 @@ public class ProductAdaptor extends BaseAdapter {
     }
 
     public void delete(int pos){
-        CookFoodApp.getInstance().RunPreLoader(mContext);
+        CookFoodApp.getInstance().RunPreLoader(_context);
 
         DeleteProductList= new HashMap();
 

@@ -38,7 +38,7 @@ import butterknife.InjectView;
 
 public class SearchIngredientActivity extends ActionBarActivity {
     String SearchString;
-    Context mContext;
+    Context _context;
     private static final String TAG = "SearchIngredientActivity";
 
     @InjectView(R.id.lv_search_ingredient)
@@ -47,8 +47,8 @@ public class SearchIngredientActivity extends ActionBarActivity {
     @InjectView(R.id.tv_search_ingredient_info)
     TextView tv_search_ingredient_info;
 
-    public int ActionBarColor;
-    public int StatusBarColor;
+    public int _actionBarColor;
+    public int _statusBarColor;
 
     IngredientAdaptor IngAdapr;
     public List<Ingredients> ingredientItems;
@@ -59,7 +59,7 @@ public class SearchIngredientActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_ingredient);
 
-        mContext = this;
+        _context = this;
         ButterKnife.inject(this);
         SearchString="";
 
@@ -71,17 +71,17 @@ public class SearchIngredientActivity extends ActionBarActivity {
 
     public void InitActionBar() {
 
-        ActionBarColor = getResources().getColor(R.color.DodgerBlue);
-        StatusBarColor = CookFoodApp.getInstance().getDarkColor(ActionBarColor);
+        _actionBarColor = ContextCompat.getColor(_context,R.color.DodgerBlue);
+        _statusBarColor = CookFoodApp.getInstance().getDarkColor(_actionBarColor);
 
 
         getSupportActionBar().setTitle("Search Recipe");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ActionBarColor));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(_actionBarColor));
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
-            window.setStatusBarColor(StatusBarColor);
+            window.setStatusBarColor(_statusBarColor);
 
         }
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -90,15 +90,15 @@ public class SearchIngredientActivity extends ActionBarActivity {
     public void SetUpMainContent() {
 
         ingredientItems = new ArrayList<Ingredients>();
-        IngAdapr = new IngredientAdaptor(mContext,ingredientItems, -1 );
-        MultiItemRowListAdapter twoRowAdapter = new MultiItemRowListAdapter(mContext, IngAdapr, 3, 5 );
+        IngAdapr = new IngredientAdaptor(_context,ingredientItems, -1 );
+        MultiItemRowListAdapter twoRowAdapter = new MultiItemRowListAdapter(_context, IngAdapr, 3, 5 );
 
 
         lv_search_ingredient.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String RecipeDataObjectId =ingredientItems.get(position).getObjectId();
-                startActivity(new Intent(mContext, CreateRecipeActivity.class).putExtra("command","play").putExtra("RecipeDataObjectId",RecipeDataObjectId));
+                startActivity(new Intent(_context, CreateRecipeActivity.class).putExtra("command","play").putExtra("RecipeDataObjectId",RecipeDataObjectId));
 
 
             }
@@ -191,14 +191,14 @@ public class SearchIngredientActivity extends ActionBarActivity {
 
         query.orderByDescending("Name");
 
-        CookFoodApp.getInstance().RunPreLoader(mContext);
+        CookFoodApp.getInstance().RunPreLoader(_context);
         query.findInBackground(new FindCallback<Ingredients>() {
             @Override
             public void done(List<Ingredients> productListTemp, ParseException e) {
                 CookFoodApp.getInstance().pd.dismiss();
                 if (e != null) {
                     Log.d(TAG, e.toString());
-                    Toast.makeText(mContext, "Server Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(_context, "Server Error", Toast.LENGTH_LONG).show();
                     return;
                 }
                 ingredientItems.clear();

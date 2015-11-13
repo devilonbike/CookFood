@@ -86,7 +86,7 @@ ADDED from AndroidManifest.xml:30:13
 		ADDED from AndroidManifest.xml:32:17
 	android:name
 		ADDED from AndroidManifest.xml:31:17
-activity#com.xplorer.cookfood.Activity.CreateRecipeActivity
+activity#com.xplorer.cookfood.Activity.CreateRecipe.CreateRecipeActivity
 ADDED from AndroidManifest.xml:35:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:38:13

@@ -84,7 +84,7 @@ import butterknife.InjectView;
 
 public class CreateRecipeActivity extends ActionBarActivity implements TextToSpeech.OnUtteranceCompletedListener, SensorEventListener {
 
-    Context mContext;
+    Context _context;
     TextToSpeech ttobj;
     private float lastX;
     boolean isPlaying = false;
@@ -100,8 +100,8 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
     String command;
 
 
-    public int ActionBarColor;
-    public int StatusBarColor;
+    public int _actionBarColor;
+    public int _statusBarColor;
 
 
     Menu MenuInstance;
@@ -251,19 +251,19 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                 if (!CookFoodApp.getSPString(CookFoodApp.PROXIMITY_ON).equalsIgnoreCase("true")) {
                     Log.d(TAG, "play Proximity turned off");
                     if (mSensorManager != null)
-                        mSensorManager.unregisterListener((SensorEventListener) mContext);
+                        mSensorManager.unregisterListener((SensorEventListener) _context);
                     tv_create_recipe_proximity.setText("Sensor Off");
                     CookFoodApp.setSPString(CookFoodApp.PROXIMITY_ON, "false");
                 } else {
                     Log.d(TAG, "play Proximity turned on");
-                    mSensorManager.registerListener((SensorEventListener) mContext, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                    mSensorManager.registerListener((SensorEventListener) _context, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
                     tv_create_recipe_proximity.setText("Sensor On");
                     CookFoodApp.setSPString(CookFoodApp.PROXIMITY_ON, "true");
                 }
             } else {
                 Log.d(TAG, "!play Proximity turned off");
                 if (mSensorManager != null)
-                    mSensorManager.unregisterListener((SensorEventListener) mContext);
+                    mSensorManager.unregisterListener((SensorEventListener) _context);
             }
         }
 
@@ -271,26 +271,26 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
 
     public void InitActionBar() {
 
-        ActionBarColor = getResources().getColor(R.color.Red);
-        StatusBarColor = CookFoodApp.getInstance().getDarkColor(ActionBarColor);
+        _actionBarColor = ContextCompat.getColor(_context,R.color.Red);
+        _statusBarColor = CookFoodApp.getInstance().getDarkColor(_actionBarColor);
 
         getSupportActionBar().setTitle("Create your Recipe");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ActionBarColor));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(_actionBarColor));
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
-            window.setStatusBarColor(StatusBarColor);
+            window.setStatusBarColor(_statusBarColor);
 
         }
 
-        int iconColor = getResources().getColor(R.color.gray6);
+        int iconColor = ContextCompat.getColor(_context,R.color.gray6);
 
         iv_create_recipe_download.setColorFilter(iconColor);
         iv_create_recipe_view.setColorFilter(iconColor);
         iv_create_recipe_proximity.setColorFilter(iconColor);
-        //setColorFilter(ActionBarColor);
+        //setColorFilter(_actionBarColor);
     }
 
     public void InitSliderPanel() {
@@ -303,19 +303,19 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                 if (slideOffset > .82 && getSupportActionBar().isShowing()) {
                     getSupportActionBar().hide();
 
-                    iv_create_recipe_actionicon.setColorFilter(mContext.getResources().getColor(R.color.white));
-                    tv_create_recipe_ht.setTextColor(mContext.getResources().getColor(R.color.white));
-                    tv_create_recipe_hd.setTextColor(mContext.getResources().getColor(R.color.white));
+                    iv_create_recipe_actionicon.setColorFilter(_context.ContextCompat.getColor(_context,R.color.white));
+                    tv_create_recipe_ht.setTextColor(_context.ContextCompat.getColor(_context,R.color.white));
+                    tv_create_recipe_hd.setTextColor(_context.ContextCompat.getColor(_context,R.color.white));
 
-                    ll_create_recipe_header.setBackgroundColor(mContext.getResources().getColor(R.color.Red));
+                    ll_create_recipe_header.setBackgroundColor(_context.ContextCompat.getColor(_context,R.color.Red));
                 } else if (slideOffset < .82 && !getSupportActionBar().isShowing()) {
                     getSupportActionBar().show();
 
-                    iv_create_recipe_actionicon.setColorFilter(mContext.getResources().getColor(R.color.Black));
-                    tv_create_recipe_ht.setTextColor(mContext.getResources().getColor(R.color.Black));
-                    tv_create_recipe_hd.setTextColor(mContext.getResources().getColor(R.color.Black));
+                    iv_create_recipe_actionicon.setColorFilter(_context.ContextCompat.getColor(_context,R.color.Black));
+                    tv_create_recipe_ht.setTextColor(_context.ContextCompat.getColor(_context,R.color.Black));
+                    tv_create_recipe_hd.setTextColor(_context.ContextCompat.getColor(_context,R.color.Black));
 
-                    ll_create_recipe_header.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+                    ll_create_recipe_header.setBackgroundColor(_context.ContextCompat.getColor(_context,R.color.white));
 
 
                 }
@@ -364,9 +364,9 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
         pager_action_product.setCurrentItem(0);
 
         tabs_action_product.setViewPager(pager_action_product);
-        tabs_action_product.setDividerColor(getResources().getColor(R.color.black));
-        //tabs_action_product.setTextColor(getResources().getColor(R.color.white));
-        //tabs_action_product.setIndicatorColor(getResources().getColor(R.color.white));
+        tabs_action_product.setDividerColor(ContextCompat.getColor(_context,R.color.black));
+        //tabs_action_product.setTextColor(ContextCompat.getColor(_context,R.color.white));
+        //tabs_action_product.setIndicatorColor(ContextCompat.getColor(_context,R.color.white));
 
         tabs_action_product.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -392,7 +392,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
 
 
     public void InitDialog() {
-        dialog = new Dialog(mContext);
+        dialog = new Dialog(_context);
 
         dialog.setContentView(R.layout.dialog_recipe);
         dialog.setTitle(Html.fromHtml("<font color='#FFFFFF'>Recipe Information</font>"));
@@ -413,7 +413,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
             }
         });
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, CookFoodApp.getInstance().CategoryFood);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(_context, android.R.layout.simple_spinner_item, CookFoodApp.getInstance().CategoryFood);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnr_dialog_category.setAdapter(dataAdapter);
 
@@ -437,7 +437,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                 String desc = et_dialog_desc.getText().toString();
 
                 if (title.equalsIgnoreCase("")) {
-                    Toast.makeText(mContext, "Please Enter Title.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_context, "Please Enter Title.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -449,7 +449,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
 
     public void InitTimerDialog() {
 
-        TimerDialog = new Dialog(mContext);
+        TimerDialog = new Dialog(_context);
 
         TimerDialog.setContentView(R.layout.dialog_timer);
         TimerDialog.setTitle(Html.fromHtml("<font color='#FFFFFF'>Set Timer</font>"));
@@ -465,7 +465,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                 String timer = et_dialog_timer_name.getText().toString();
 
                 if (timer.equalsIgnoreCase("")) {
-                    Toast.makeText(mContext, "Please Enter Some Time.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_context, "Please Enter Some Time.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 timeMin = timer;
@@ -484,7 +484,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
         });
         TimerDialog.show();
 
-        ColorDrawable colorDrawable = new ColorDrawable(StatusBarColor);
+        ColorDrawable colorDrawable = new ColorDrawable(_statusBarColor);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(TimerDialog.getWindow().getAttributes());
         lp.width = (int) (WindowManager.LayoutParams.MATCH_PARENT);
@@ -496,7 +496,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
 
 
         if (command.equalsIgnoreCase("create") || command.equalsIgnoreCase("unsaved")) {
-            Toast.makeText(mContext, "Save your recipe first.", Toast.LENGTH_LONG).show();
+            Toast.makeText(_context, "Save your recipe first.", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -516,7 +516,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
 
                 if (e != null) {
                     Log.d(TAG, e.toString());
-                    Toast.makeText(mContext, "Please check your Internet connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(_context, "Please check your Internet connection", Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -524,7 +524,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                     public void done(ParseException e) {
                         if (e != null) {    // There was some error.
                             Log.d(TAG, e.toString());
-                            Toast.makeText(mContext, "Error in deleting cache.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(_context, "Error in deleting cache.", Toast.LENGTH_LONG).show();
 
                         }
                         Log.d("fromPin Recipe (" + ListOfRecipes.size() + ")", ListOfRecipes.toString());
@@ -567,14 +567,14 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
 
                if (e != null) {
                    Log.d(TAG, e.toString());
-                   Toast.makeText(mContext, "Please check your Internet connection", Toast.LENGTH_LONG).show();
+                   Toast.makeText(_context, "Please check your Internet connection", Toast.LENGTH_LONG).show();
                    return;
                }
                ParseObject.unpinAllInBackground(productTag, productListTemp, new DeleteCallback() {
                    public void done(ParseException e) {
                        if (e != null) {    // There was some error.
                            Log.d(TAG, e.toString());
-                           Toast.makeText(mContext, "Error in deleting cache.", Toast.LENGTH_LONG).show();
+                           Toast.makeText(_context, "Error in deleting cache.", Toast.LENGTH_LONG).show();
 
                        }
                        Log.d("fromPin product (" + productListTemp.size() + ")", productListTemp.toString());
@@ -625,14 +625,14 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
             public void done(final List<Ingredients> IngredientsList, ParseException e) {
                 if (e != null) {
                     Log.d(TAG, e.toString());
-                    Toast.makeText(mContext, "Please check your Internet connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(_context, "Please check your Internet connection", Toast.LENGTH_LONG).show();
                     return;
                 }
                 ParseObject.unpinAllInBackground(ingredientTag, IngredientsList, new DeleteCallback() {
                     public void done(ParseException e) {
                         if (e != null) {    // There was some error.
                             Log.d(TAG, e.toString());
-                            Toast.makeText(mContext, "Error in deleting cache.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(_context, "Error in deleting cache.", Toast.LENGTH_LONG).show();
 
                         }
                         Log.d("fromPin Ingredient (" + IngredientsList.size() + ")", IngredientsList.toString());
@@ -640,7 +640,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                         Log.d("New IngredientsList (" + IngredientsList.size() + ")", IngredientsList.toString());
                         ParseObject.pinAllInBackground(ingredientTag, IngredientsList);
 
-                        Toast.makeText(mContext, "Recipe has been saved offline successfully.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(_context, "Recipe has been saved offline successfully.", Toast.LENGTH_LONG).show();
 
                     }
                 });
@@ -681,7 +681,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                 if (isPlaying) {
                     ttobj.stop();
                     isPlaying = false;
-                    Picasso.with(mContext).load(R.drawable.play_recipe).error(R.drawable.error_image).into(iv_create_recipe_playpause);
+                    Picasso.with(_context).load(R.drawable.play_recipe).error(R.drawable.error_image).into(iv_create_recipe_playpause);
                     stopTimer();
                 } else {
                     if (CP >= 0 && CP < CookFoodApp.getInstance().CustomProductList.size()) {
@@ -689,7 +689,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                         rl_create_activity_Anim_iv.setVisibility(View.VISIBLE);
                         rl_create_activity_Anim_info.setVisibility(View.GONE);
                     } else {
-                        Toast.makeText(mContext, "Create some recipe first.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(_context, "Create some recipe first.", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -712,7 +712,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                     rl_create_activity_Anim_iv.setVisibility(View.VISIBLE);
                     rl_create_activity_Anim_info.setVisibility(View.GONE);
                 } else {
-                    Toast.makeText(mContext, "Recipe Starts", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_context, "Recipe Starts", Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -726,7 +726,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                 rl_create_activity_Anim_info.setVisibility(View.VISIBLE);
                 ttobj.stop();
                 isPlaying = false;
-                Picasso.with(mContext).load(R.drawable.play_recipe).error(R.drawable.error_image).into(iv_create_recipe_playpause);
+                Picasso.with(_context).load(R.drawable.play_recipe).error(R.drawable.error_image).into(iv_create_recipe_playpause);
 
                 stopTimer();
 
@@ -737,8 +737,8 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
         });
 
 
-        vf_create_recepie_ingredient.setInAnimation(AnimationUtils.loadAnimation(mContext, R.anim.slide_in_from_left));
-        vf_create_recepie_ingredient.setOutAnimation(AnimationUtils.loadAnimation(mContext, R.anim.slide_out_to_right));
+        vf_create_recepie_ingredient.setInAnimation(AnimationUtils.loadAnimation(_context, R.anim.slide_in_from_left));
+        vf_create_recepie_ingredient.setOutAnimation(AnimationUtils.loadAnimation(_context, R.anim.slide_out_to_right));
 
 
         rl_create_activity_Anim_iv.setVisibility(View.GONE);
@@ -764,7 +764,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
 
                         ttobj.speak("Recipe ended", TextToSpeech.QUEUE_FLUSH, myHashAlarm);
 
-                        Toast.makeText(mContext, "Recipe Ended", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(_context, "Recipe Ended", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -783,7 +783,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                 if (isTimePlaying) {
                     stopTimer();
                 } else {
-                    Picasso.with(mContext).load(R.drawable.pause_recipe).error(R.drawable.error_image).into(iv_create_recipe_timerplay);
+                    Picasso.with(_context).load(R.drawable.pause_recipe).error(R.drawable.error_image).into(iv_create_recipe_timerplay);
                     cm_create_recipe_speak.setBase(cm_create_recipe_speak.getBase() + SystemClock.elapsedRealtime() - lastPause);
                     cm_create_recipe_speak.start();
                     isTimePlaying = true;
@@ -810,31 +810,31 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
             if (!CookFoodApp.getSPString(CookFoodApp.PROXIMITY_ON).equalsIgnoreCase("true")) {
                 Log.d(TAG, "play Proximity turned off");
                 if (mSensorManager != null)
-                    mSensorManager.unregisterListener((SensorEventListener) mContext);
+                    mSensorManager.unregisterListener((SensorEventListener) _context);
                 tv_create_recipe_proximity.setText("Sensor Off");
                 CookFoodApp.setSPString(CookFoodApp.PROXIMITY_ON, "false");
             } else {
                 Log.d(TAG, "play Proximity turned on");
-                mSensorManager.registerListener((SensorEventListener) mContext, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                mSensorManager.registerListener((SensorEventListener) _context, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
                 tv_create_recipe_proximity.setText("Sensor On");
                 CookFoodApp.setSPString(CookFoodApp.PROXIMITY_ON, "true");
             }
         }else{
             Log.d(TAG, "!play Proximity turned off");
             if (mSensorManager != null)
-                mSensorManager.unregisterListener((SensorEventListener) mContext);
+                mSensorManager.unregisterListener((SensorEventListener) _context);
         }
 
         ll_create_recipe_proximity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(CookFoodApp.getSPString(CookFoodApp.PROXIMITY_ON).equalsIgnoreCase("false")){
-                    mSensorManager.registerListener((SensorEventListener) mContext, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                    mSensorManager.registerListener((SensorEventListener) _context, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
                     tv_create_recipe_proximity.setText("Sensor On");
                     CookFoodApp.setSPString(CookFoodApp.PROXIMITY_ON, "true");
                 }else{
                     if (mSensorManager != null)
-                        mSensorManager.unregisterListener((SensorEventListener) mContext);
+                        mSensorManager.unregisterListener((SensorEventListener) _context);
                     tv_create_recipe_proximity.setText("Sensor Off");
                     CookFoodApp.setSPString(CookFoodApp.PROXIMITY_ON, "false");
                 }
@@ -860,14 +860,14 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
             myHashAlarm.put(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf(AudioManager.STREAM_MUSIC));
 
             ttobj.speak("Recipe ended", TextToSpeech.QUEUE_FLUSH, myHashAlarm);
-            Toast.makeText(mContext, "Recipe Ended", Toast.LENGTH_SHORT).show();
+            Toast.makeText(_context, "Recipe Ended", Toast.LENGTH_SHORT).show();
         }
 
 
     }
 
     public void stopTimer() {
-        Picasso.with(mContext).load(R.drawable.play_recipe).error(R.drawable.error_image).into(iv_create_recipe_timerplay);
+        Picasso.with(_context).load(R.drawable.play_recipe).error(R.drawable.error_image).into(iv_create_recipe_timerplay);
 
         isTimePlaying = false;
         lastPause = SystemClock.elapsedRealtime();
@@ -884,7 +884,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
         byte[] dataImage = stream.toByteArray();
 
         final ParseFile file = new ParseFile("img.jpg", dataImage);
-        CookFoodApp.getInstance().RunPreLoader(mContext);
+        CookFoodApp.getInstance().RunPreLoader(_context);
 
         file.saveInBackground(new SaveCallback() {
             @Override
@@ -893,7 +893,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                     Log.e(TAG, e.toString());
                     CookFoodApp.getInstance().pd.dismiss();
                     dialog.dismiss();
-                    Toast.makeText(mContext, "Server Error (while uploading Recipe Image)", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(_context, "Server Error (while uploading Recipe Image)", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String title = et_dialog_name.getText().toString();
@@ -957,7 +957,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
             Log.d(TAG, "FoundCounter return");
             // UPLOAD COMPLETE
             CookFoodApp.getInstance().pd.dismiss();
-            Toast.makeText(mContext, "Saved Recipe Successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(_context, "Saved Recipe Successfully", Toast.LENGTH_SHORT).show();
             dialog.dismiss();
             finish();
             return;
@@ -976,7 +976,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                 public void done(ParseException e) {
                     if (e != null) {
                         Log.d("saveInBackground CookFoodApp.getInstance().CustomProductList.get(i)", e.toString());
-                        Toast.makeText(mContext, "Error while saving Recipe", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(_context, "Error while saving Recipe", Toast.LENGTH_SHORT).show();
                     }
 
                     uploadedCount++;
@@ -1113,9 +1113,9 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
 
 
         if(CookFoodApp.getInstance().pd==null){
-            CookFoodApp.getInstance().RunPreLoader(mContext);
+            CookFoodApp.getInstance().RunPreLoader(_context);
         }else if(!CookFoodApp.getInstance().pd.isShowing()){
-            CookFoodApp.getInstance().RunPreLoader(mContext);
+            CookFoodApp.getInstance().RunPreLoader(_context);
         }
 
 
@@ -1125,7 +1125,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
 
                 if (e != null) {
                     if (e != null) Log.d(TAG, e.toString());
-                    Toast.makeText(mContext, "Please check your Internet connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(_context, "Please check your Internet connection", Toast.LENGTH_LONG).show();
                     CookFoodApp.getInstance().pd.dismiss();
                     return;
                 }
@@ -1146,7 +1146,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                 if (temp.getDescription() != null)
                     et_dialog_desc.setText(temp.getDescription());
                 if (temp.getImageFile() != null)
-                    Picasso.with(mContext).load(temp.getImageFile().getUrl()).error(R.drawable.error_image).into(iv_dialog_recipe);
+                    Picasso.with(_context).load(temp.getImageFile().getUrl()).error(R.drawable.error_image).into(iv_dialog_recipe);
 
                 getProductData(fromPin);
 
@@ -1171,7 +1171,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
 
                                        if (e != null) {
                                            Log.d(TAG, e.toString());
-                                           Toast.makeText(mContext, "Please check your Internet connection", Toast.LENGTH_LONG).show();
+                                           Toast.makeText(_context, "Please check your Internet connection", Toast.LENGTH_LONG).show();
                                            CookFoodApp.getInstance().pd.dismiss();
                                            return;
                                        }
@@ -1231,7 +1231,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
             public void done(List<Ingredients> IngredientsList, ParseException e) {
                 if (e != null) {
                     Log.d(TAG, e.toString());
-                    Toast.makeText(mContext, "Please check your Internet connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(_context, "Please check your Internet connection", Toast.LENGTH_LONG).show();
                     CookFoodApp.getInstance().pd.dismiss();
                     return;
                 }
@@ -1350,7 +1350,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                 tv_item_product_time.setText("Timer goes off");
                 timeMin = pMain.getTime();
                 cm_create_recipe_speak.start();
-                Picasso.with(mContext).load(R.drawable.pause_recipe).error(R.drawable.error_image).into(iv_create_recipe_timerplay);
+                Picasso.with(_context).load(R.drawable.pause_recipe).error(R.drawable.error_image).into(iv_create_recipe_timerplay);
 
                 isTimePlaying = true;
             }
@@ -1371,7 +1371,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
         ttobj.setOnUtteranceCompletedListener(this);
 
         tv_create_recipe_speak.setText(speak);
-        Picasso.with(mContext).load(CookFoodApp.getInstance().ActionImg.get(action)).error(R.drawable.error_image).into(iv_item_product_action);
+        Picasso.with(_context).load(CookFoodApp.getInstance().ActionImg.get(action)).error(R.drawable.error_image).into(iv_item_product_action);
         tv_item_product_action.setText(action);
         tv_item_product_desc.setText(CookFoodApp.getInstance().ActionDescription.get(action));
 
@@ -1383,7 +1383,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
             vf_create_recepie_ingredient.stopFlipping();
         }
 
-        Picasso.with(mContext).load(R.drawable.pause_recipe).error(R.drawable.error_image).into(iv_create_recipe_playpause);
+        Picasso.with(_context).load(R.drawable.pause_recipe).error(R.drawable.error_image).into(iv_create_recipe_playpause);
 
         isPlaying = true;
 
@@ -1431,9 +1431,9 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
 
         ViewHolder holder = null;
         View view;
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.item_ingredient, null, false);
-        holder = new ViewHolder(view, mContext);
+        holder = new ViewHolder(view, _context);
         view.setTag(holder);
         holder.iv_item_ingredient_info.setVisibility(View.GONE);
         Log.d("getFlipView iv_item_ingredient_actionimg", p.getAction());
@@ -1442,13 +1442,13 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
             Ingredients ing = p.getIngredient();
             holder.tv_item_ingredient_name.setText(ing.getName());
             holder.tv_item_ingredient_description.setText(ing.getNameHindi());
-            Picasso.with(mContext).load(ing.getImageFile().getUrl()).error(R.drawable.error_image).into(holder.iv_item_ingredient_actionimg);
+            Picasso.with(_context).load(ing.getImageFile().getUrl()).error(R.drawable.error_image).into(holder.iv_item_ingredient_actionimg);
 
         } else {
             holder.tv_item_ingredient_name.setText(p.getAction());
             holder.tv_item_ingredient_description.setText("Step " + step);
 
-            Picasso.with(mContext).load(CookFoodApp.getInstance().ActionImg.get(p.getAction())).error(R.drawable.error_image).into(holder.iv_item_ingredient_actionimg);
+            Picasso.with(_context).load(CookFoodApp.getInstance().ActionImg.get(p.getAction())).error(R.drawable.error_image).into(holder.iv_item_ingredient_actionimg);
 
         }
         holder.ll_item_ingredient_top.setOnTouchListener(new View.OnTouchListener() {
@@ -1469,8 +1469,8 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                             if (vf_create_recepie_ingredient.getDisplayedChild() == 0)
                                 break;
 
-                            vf_create_recepie_ingredient.setInAnimation(mContext, R.anim.slide_in_from_left);
-                            vf_create_recepie_ingredient.setOutAnimation(mContext, R.anim.slide_out_to_right);
+                            vf_create_recepie_ingredient.setInAnimation(_context, R.anim.slide_in_from_left);
+                            vf_create_recepie_ingredient.setOutAnimation(_context, R.anim.slide_out_to_right);
                             vf_create_recepie_ingredient.showNext();
                         }
 
@@ -1479,8 +1479,8 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
                             if (vf_create_recepie_ingredient.getDisplayedChild() == 1)
                                 break;
 
-                            vf_create_recepie_ingredient.setInAnimation(mContext, R.anim.slide_in_from_right);
-                            vf_create_recepie_ingredient.setOutAnimation(mContext, R.anim.slide_out_to_left);
+                            vf_create_recepie_ingredient.setInAnimation(_context, R.anim.slide_in_from_right);
+                            vf_create_recepie_ingredient.setOutAnimation(_context, R.anim.slide_out_to_left);
                             vf_create_recepie_ingredient.showPrevious();
                         }
                         break;
@@ -1497,7 +1497,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
     @Override
     public void onUtteranceCompleted(String utteranceId) {
         Log.d(TAG, "onUtteranceCompleted:" + utteranceId);
-        Handler mainHandler = new Handler(mContext.getMainLooper());
+        Handler mainHandler = new Handler(_context.getMainLooper());
         if (utteranceId.equalsIgnoreCase("SPEECH DONE")) {
             isPlaying = false;
 
@@ -1511,7 +1511,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
     Runnable runOnMainThreadPictureChange = new Runnable() {
         @Override
         public void run() {
-            Picasso.with(mContext).load(R.drawable.play_recipe).error(R.drawable.error_image).into(iv_create_recipe_playpause);
+            Picasso.with(_context).load(R.drawable.play_recipe).error(R.drawable.error_image).into(iv_create_recipe_playpause);
         }
     };
 
@@ -1573,7 +1573,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
         RecipeObjectId = getIntent().getStringExtra("RecipeDataObjectId");
         CookFoodApp.getInstance().RecipeObject = null;
 
-        mContext = this;
+        _context = this;
         ButterKnife.inject(this);
         CP = 0;
         lastPause = 0;
@@ -1630,8 +1630,8 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
         if (CookFoodApp.getInstance().RecipeObject != null) {
             et_dialog_name.setText(CookFoodApp.getInstance().RecipeObject.getTitle());
             et_dialog_desc.setText(CookFoodApp.getInstance().RecipeObject.getDescription());
-            if(CookFoodApp.getInstance().RecipeObject.getImageFile()!=null) Picasso.with(mContext).load(CookFoodApp.getInstance().RecipeObject.getImageFile().getUrl()).error(R.drawable.recepi).into(iv_dialog_recipe);
-            else Picasso.with(mContext).load(R.drawable.recepi).error(R.drawable.recepi).into(iv_dialog_recipe);
+            if(CookFoodApp.getInstance().RecipeObject.getImageFile()!=null) Picasso.with(_context).load(CookFoodApp.getInstance().RecipeObject.getImageFile().getUrl()).error(R.drawable.recepi).into(iv_dialog_recipe);
+            else Picasso.with(_context).load(R.drawable.recepi).error(R.drawable.recepi).into(iv_dialog_recipe);
 
             if(CookFoodApp.getInstance().RecipeObject.getPublished()) rb_dialog_recipe_publish.setChecked(true);
             else rb_dialog_recipe_unpublish.setChecked(true);
@@ -1640,7 +1640,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
             spnr_dialog_category.setSelection(getIndexOfPCategory(cat));
         }
         dialog.show();
-        ColorDrawable colorDrawable = new ColorDrawable(StatusBarColor);
+        ColorDrawable colorDrawable = new ColorDrawable(_statusBarColor);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialog.getWindow().getAttributes());
         lp.width = (int) (WindowManager.LayoutParams.MATCH_PARENT);
@@ -1709,7 +1709,7 @@ public class CreateRecipeActivity extends ActionBarActivity implements TextToSpe
 
         ttobj.stop();
         if (mSensorManager != null)
-            mSensorManager.unregisterListener((SensorEventListener) mContext);
+            mSensorManager.unregisterListener((SensorEventListener) _context);
 
         super.onBackPressed();
     }

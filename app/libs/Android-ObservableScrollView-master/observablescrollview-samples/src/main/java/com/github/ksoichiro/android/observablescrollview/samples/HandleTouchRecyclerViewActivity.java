@@ -75,12 +75,12 @@ public class HandleTouchRecyclerViewActivity extends BaseActivity implements Obs
     }
 
     public static class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
-        private Context mContext;
+        private Context _context;
         private LayoutInflater mInflater;
         private ArrayList<String> mItems;
 
         public CustomAdapter(Context context, ArrayList<String> items) {
-            mContext = context;
+            _context = context;
             mInflater = LayoutInflater.from(context);
             mItems = items;
         }
@@ -92,7 +92,7 @@ public class HandleTouchRecyclerViewActivity extends BaseActivity implements Obs
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new ViewHolder(mContext, mInflater.inflate(R.layout.list_item_handletouch, parent, false));
+            return new ViewHolder(_context, mInflater.inflate(R.layout.list_item_handletouch, parent, false));
         }
 
         @Override

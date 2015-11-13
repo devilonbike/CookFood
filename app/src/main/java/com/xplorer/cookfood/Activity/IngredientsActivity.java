@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public class IngredientsActivity extends ActionBarActivity {
-    Context mContext;
+    Context _context;
     private TabsPagerAdapter pagerAdapter;
 
 //-------------Search-------------------//
@@ -42,8 +42,8 @@ public class IngredientsActivity extends ActionBarActivity {
     ViewPager vp_pager;
 
 
-    public int ActionBarColor;
-    public int StatusBarColor;
+    public int _actionBarColor;
+    public int _statusBarColor;
 
 
     @Override
@@ -52,7 +52,7 @@ public class IngredientsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_ingredients);
 
 
-        mContext = this;
+        _context = this;
         ButterKnife.inject(this);
 
         InitActionBar();
@@ -69,18 +69,18 @@ public class IngredientsActivity extends ActionBarActivity {
 
     }
     public void InitActionBar(){
-        ActionBarColor = getResources().getColor(R.color.DodgerBlue);
-        StatusBarColor = CookFoodApp.getInstance().getDarkColor(ActionBarColor);
+        _actionBarColor = ContextCompat.getColor(_context,R.color.DodgerBlue);
+        _statusBarColor = CookFoodApp.getInstance().getDarkColor(_actionBarColor);
 
         getSupportActionBar().setTitle("Choose Ingredient");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ActionBarColor));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(_actionBarColor));
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
-            window.setStatusBarColor(StatusBarColor);
+            window.setStatusBarColor(_statusBarColor);
 
         }
         setVolumeControlStream(AudioManager.STREAM_MUSIC);

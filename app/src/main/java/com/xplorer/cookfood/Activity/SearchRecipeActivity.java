@@ -38,7 +38,7 @@ import butterknife.InjectView;
 public class SearchRecipeActivity extends ActionBarActivity {
 
     String SearchString;
-    Context mContext;
+    Context _context;
     private static final String TAG = "SearchRecipeActivity";
 
     @InjectView(R.id.lv_search_recipe)
@@ -47,8 +47,8 @@ public class SearchRecipeActivity extends ActionBarActivity {
     @InjectView(R.id.tv_search_recipe_info)
     TextView tv_search_recipe_info;
 
-    public int ActionBarColor;
-    public int StatusBarColor;
+    public int _actionBarColor;
+    public int _statusBarColor;
 
     RecipeAdaptor recpAdapt;
     public List<RecipeData> RecipeList;
@@ -60,7 +60,7 @@ public class SearchRecipeActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_recipe);
 
-        mContext = this;
+        _context = this;
         ButterKnife.inject(this);
         SearchString="";
 
@@ -72,17 +72,17 @@ public class SearchRecipeActivity extends ActionBarActivity {
 
     public void InitActionBar() {
 
-        ActionBarColor = getResources().getColor(R.color.LightGold);
-        StatusBarColor = CookFoodApp.getInstance().getDarkColor(ActionBarColor);
+        _actionBarColor = ContextCompat.getColor(_context,R.color.LightGold);
+        _statusBarColor = CookFoodApp.getInstance().getDarkColor(_actionBarColor);
 
 
         getSupportActionBar().setTitle("Search Recipe");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ActionBarColor));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(_actionBarColor));
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
-            window.setStatusBarColor(StatusBarColor);
+            window.setStatusBarColor(_statusBarColor);
 
         }
     }
@@ -91,14 +91,14 @@ public class SearchRecipeActivity extends ActionBarActivity {
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         RecipeList = new ArrayList<RecipeData>();
-        recpAdapt = new RecipeAdaptor(mContext, RecipeList);
+        recpAdapt = new RecipeAdaptor(_context, RecipeList);
 
 
         lv_search_recipe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String RecipeDataObjectId =RecipeList.get(position).getObjectId();
-                startActivity(new Intent(mContext, CreateRecipeActivity.class).putExtra("command","play").putExtra("RecipeDataObjectId",RecipeDataObjectId));
+                startActivity(new Intent(_context, CreateRecipeActivity.class).putExtra("command","play").putExtra("RecipeDataObjectId",RecipeDataObjectId));
 
 
             }
@@ -182,7 +182,7 @@ public class SearchRecipeActivity extends ActionBarActivity {
         query.orderByDescending("createdAt");
 
 
-        CookFoodApp.getInstance().RunPreLoader(mContext);
+        CookFoodApp.getInstance().RunPreLoader(_context);
         query.findInBackground(new FindCallback<RecipeData>() {
             @Override
             public void done(List<RecipeData> productListTemp, ParseException e) {
@@ -190,7 +190,7 @@ public class SearchRecipeActivity extends ActionBarActivity {
 
                 if (e != null) {
                     Log.d(TAG, e.toString());
-                    Toast.makeText(mContext, "Server Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(_context, "Server Error", Toast.LENGTH_LONG).show();
                     return;
                 }
                 RecipeList.clear();

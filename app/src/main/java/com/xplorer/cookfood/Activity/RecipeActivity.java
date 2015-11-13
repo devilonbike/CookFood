@@ -41,11 +41,11 @@ import butterknife.InjectView;
 
 public class RecipeActivity extends ActionBarActivity {
 
-    Context mContext;
+    Context _context;
     private static final String TAG = "RecipeActivity";
 
-    public int ActionBarColor;
-    public int StatusBarColor;
+    public int _actionBarColor;
+    public int _statusBarColor;
 
     @InjectView(R.id.lv_recipe)
     ListView lv_recipe;
@@ -87,20 +87,20 @@ public class RecipeActivity extends ActionBarActivity {
     public void InitActionBar() {
 
         if (TITLE.equalsIgnoreCase("My Recipes")) {
-            ActionBarColor = getResources().getColor(R.color.LightGold);
+            _actionBarColor = ContextCompat.getColor(_context,R.color.LightGold);
         }else if (TITLE.equalsIgnoreCase("Saved Recipes")) {
-            ActionBarColor = getResources().getColor(R.color.LightGold);
+            _actionBarColor = ContextCompat.getColor(_context,R.color.LightGold);
         }
-        StatusBarColor = CookFoodApp.getInstance().getDarkColor(ActionBarColor);
+        _statusBarColor = CookFoodApp.getInstance().getDarkColor(_actionBarColor);
 
 
         getSupportActionBar().setTitle(TITLE);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ActionBarColor));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(_actionBarColor));
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
-            window.setStatusBarColor(StatusBarColor);
+            window.setStatusBarColor(_statusBarColor);
 
         }
     }
@@ -108,16 +108,16 @@ public class RecipeActivity extends ActionBarActivity {
     public void SetUpMainContent() {
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-        LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater mInflater = (LayoutInflater) _context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         footerView = mInflater.inflate(R.layout.footer_loadmore, null, false);
 
         RecipeList = new ArrayList<RecipeData>();
-        recpAdapt = new RecipeAdaptor(mContext, RecipeList);
-        recpEditAdapt= new RecipeEditAdaptor(mContext, RecipeList);
+        recpAdapt = new RecipeAdaptor(_context, RecipeList);
+        recpEditAdapt= new RecipeEditAdaptor(_context, RecipeList);
 
         GotAllData = false;
         loadingMore = false;
-        CookFoodApp.getInstance().RunPreLoader(mContext);
+        CookFoodApp.getInstance().RunPreLoader(_context);
         lv_recipe.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -147,7 +147,7 @@ public class RecipeActivity extends ActionBarActivity {
 
                     }else{
                         String RecipeDataObjectId =RecipeList.get(position).getObjectId();
-                        startActivity(new Intent(mContext, CreateRecipeActivity.class).putExtra("command","play").putExtra("RecipeDataObjectId",RecipeDataObjectId));
+                        startActivity(new Intent(_context, CreateRecipeActivity.class).putExtra("command","play").putExtra("RecipeDataObjectId",RecipeDataObjectId));
 
                     }
                 }
@@ -190,7 +190,7 @@ public class RecipeActivity extends ActionBarActivity {
                 CookFoodApp.getInstance().pd.dismiss();
                 if (e != null) {
                     Log.d(TAG, e.toString());
-                    Toast.makeText(mContext, "Server Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(_context, "Server Error", Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -234,7 +234,7 @@ public class RecipeActivity extends ActionBarActivity {
                         public void done(ParseException e) {
                             if (e != null) {    // There was some error.
                                 Log.d(TAG, e.toString());
-                                Toast.makeText(mContext, "Error in deleting cache.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(_context, "Error in deleting cache.", Toast.LENGTH_LONG).show();
 
                             }
 
@@ -255,7 +255,7 @@ public class RecipeActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_recipe, menu);
 
-        mContext = this;
+        _context = this;
         ButterKnife.inject(this);
 
         TITLE = getIntent().getStringExtra("TITLE");

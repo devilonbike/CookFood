@@ -26,10 +26,10 @@ import butterknife.InjectView;
  * Created by Raghavendra on 16-03-2015.
  */
 public class ActionAdaptor extends BaseAdapter {
-    private Context mContext;
+    private Context _context;
 
     public ActionAdaptor(Context context){
-        mContext = context;
+        _context = context;
 
 
     }
@@ -54,9 +54,9 @@ public class ActionAdaptor extends BaseAdapter {
         ViewHolder holder = null;
 
         if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.item_action, viewGroup, false);
-            holder = new ViewHolder(view, mContext);
+            holder = new ViewHolder(view, _context);
             view.setTag(holder);
         }else {
             holder = (ViewHolder) view.getTag();
@@ -68,7 +68,7 @@ public class ActionAdaptor extends BaseAdapter {
 
 
 
-        Picasso.with(mContext).load(CookFoodApp.getInstance().ActionImg.get(name)).
+        Picasso.with(_context).load(CookFoodApp.getInstance().ActionImg.get(name)).
                 error(R.drawable.error_image).into(FinalHolder.iv_item_action_actionimg, new com.squareup.picasso.Callback() {
             @Override
             public void onSuccess() {
